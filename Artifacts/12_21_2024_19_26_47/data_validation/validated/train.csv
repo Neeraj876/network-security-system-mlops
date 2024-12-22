@@ -1,5 +1,0 @@
-data_validation_config=DataValidationConfig(trainingpipelineconfig)
-"data_validation=DataValidation(data_ingestion_config, data_validation_config)"
-"logging.info(""Initiate the data validation"")"
-data_validation_artifact=data_validation.initiate_data_validation()
-"logging.info(""Data Validation Completed"")"

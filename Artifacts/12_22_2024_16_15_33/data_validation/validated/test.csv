@@ -1,0 +1,1 @@
+"data_validation=DataValidation(data_ingestion_artifact, data_validation_config)"

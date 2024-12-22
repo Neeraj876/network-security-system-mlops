@@ -1,0 +1,3 @@
+data_validation_config=DataValidationConfig(trainingpipelineconfig):
+  drift_status: false
+  p_value: 1.0

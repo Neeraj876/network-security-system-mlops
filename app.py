@@ -66,7 +66,10 @@ async def train_route():
 @app.post("/predict")
 async def predict_route(request: Request,file: UploadFile = File(...)):
     try:
+        print("Reading uploaded CSV file...")
         df=pd.read_csv(file.file)
+        print("CSV file loaded successfully.")
+
         #print(df)
         preprocesor=load_object("final_model/preprocessor.pkl")
         final_model=load_object("final_model/model.pkl")

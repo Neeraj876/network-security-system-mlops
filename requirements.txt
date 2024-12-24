@@ -10,6 +10,11 @@ mlflow
 fastapi
 uvicorn
 boto3
+scipy
+apache-airflow
+python-multipart
+Jinja2
+streamlit
 
 
 #-e .

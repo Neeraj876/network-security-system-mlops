@@ -25,7 +25,7 @@ from sklearn.ensemble import (
 import mlflow
 from urllib.parse import urlparse
 
-os.environ["MLFLOW_TRACKING_URI"]="http://ec2-184-72-143-145.compute-1.amazonaws.com:5000/"
+os.environ["MLFLOW_TRACKING_URI"]="http://ec2-54-221-47-33.compute-1.amazonaws.com:5000/"
 
 class ModelTrainer:
     def __init__(self, model_trainer_config:ModelTrainerConfig, data_transformation_artifact:DataTransformationArtifact):
@@ -48,7 +48,7 @@ class ModelTrainer:
             mlflow.log_metric("recall_score",recall_score)
             mlflow.sklearn.log_model(best_model,"model")
 
-            remote_server_uri="http://ec2-184-72-143-145.compute-1.amazonaws.com:5000/" 
+            remote_server_uri="http://ec2-54-221-47-33.compute-1.amazonaws.com:5000/" 
             mlflow.set_tracking_uri(remote_server_uri)
             tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
             

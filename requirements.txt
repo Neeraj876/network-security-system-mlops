@@ -6,6 +6,10 @@ certifi
 pymongo[srv]
 scikit-learn
 pyaml
+mlflow
+fastapi
+uvicorn
+boto3
 
 
 #-e .

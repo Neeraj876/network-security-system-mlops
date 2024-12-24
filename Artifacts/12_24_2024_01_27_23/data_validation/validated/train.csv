@@ -1,0 +1,1 @@
+"mlflow.sklearn.log_model(best_model, ""model"", registered_model_name=""best_model"")"

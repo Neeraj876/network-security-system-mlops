@@ -1,3 +1,0 @@
-data_validation=DataValidation(data_ingestion_artifact, data_validation_config):
-  drift_status: true
-  p_value: .nan

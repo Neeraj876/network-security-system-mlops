@@ -1,3 +1,0 @@
-"remote_server_uri=""http://ec2-184-72-143-145.compute-1.amazonaws.com:5000/"""
-mlflow.set_registry_uri(remote_server_uri)
-tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme

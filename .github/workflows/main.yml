@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   integration:
-    name: Continious Integration
+    name: Continuous Integration
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -22,8 +22,8 @@ jobs:
       - name: Lint Code
         run: echo "Linting repository"
 
-      - name: Run unit tests
-        run: echo "Running Unit Test"
+      - name: Run Unit Tests
+        run: echo "Running Unit Tests"
 
   build-and-push-ecr-image:
     name: Continuous Delivery
@@ -33,10 +33,16 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Debug Directory Structure
+        run: |
+          echo "Current Directory: $(pwd)"
+          ls -R
+
       - name: Install Utilities
         run: |
           sudo apt-get update
           sudo apt-get install -y jq unzip
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -48,16 +54,18 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build, tag, and push image to Amazon ECR
+      - name: Build, Tag, and Push Image to Amazon ECR
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
           IMAGE_TAG: latest
         run: |
-          # Build a docker container and
-          # push it to ECR so that it can
-          # be deployed to ECS.
+          # Navigate to the correct directory if necessary
+          cd /mnt/c/Users/HP/ml_projects/NetworkSecurity
+          
+          # Build and push the Docker image
           docker build -f Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"

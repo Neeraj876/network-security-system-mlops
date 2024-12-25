@@ -11,7 +11,7 @@
 # with DAG(
 #     'network_training_pipelinr',
 #     default_args={'retries': 2},
-#     description='network security pipeline',
+#     description='Network security pipeline for training and syncing to S3',
 #     schedule_interval="@weekly",
 #     start_date=pendulum.datetime(2024,12,24, tz="UTC"),
 #     catchup=False,
@@ -27,9 +27,9 @@
         
     
 #     def sync_artifact_to_s3_bucket(**kwargs):
-#         bucket_name = "mynetworksecurity"
+#         bucket_name = "networksecurity3"
 #         os.system(f"aws s3 sync /app/Artifacts s3://{bucket_name}/artifact")
-#         os.system(f"aws s3 sync /app/saved_models s3://{bucket_name}/final_model")
+#         os.system(f"aws s3 sync /app/final_model s3://{bucket_name}/final_model")
 
 #     training_pipeline  = PythonOperator(
 #             task_id="train_pipeline",

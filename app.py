@@ -19,13 +19,15 @@ from networksecurity.pipeline.training_pipeline import TrainingPipeline
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, File, UploadFile,Request
 from uvicorn import run as app_run
-from fastapi.responses import Response
+from fastapi.responses import Response, JSONResponse
 from starlette.responses import RedirectResponse
 import pandas as pd
 
 from networksecurity.utils.main_utils.utils import load_object
 
 from networksecurity.utils.ml_utils.model.estimator import NetworkModel
+
+from networksecurity.constant.training_pipeline import UPLOAD_DIR, PREDICTION_BUCKET_NAME
 
 
 client = pymongo.MongoClient(mongo_db_url, tlsCAFile=ca)
@@ -79,15 +81,39 @@ async def predict_route(request: Request,file: UploadFile = File(...)):
         print(y_pred)
         df['predicted_column'] = y_pred
         print(df['predicted_column'])
-        #df['predicted_column'].replace(-1, 0)
-        #return df.to_json()
-        df.to_csv('prediction_output/output.csv')
-        table_html = df.to_html(classes='table table-striped')
-        #print(table_html)
-        return templates.TemplateResponse("table.html", {"request": request, "table": table_html})
+        df['predicted_column'].replace(-1, 0)
+        return df.to_json()
+        # df.to_csv('prediction_output/output.csv')
+        # table_html = df.to_html(classes='table table-striped')
+        # #print(table_html)
+        # return templates.TemplateResponse("table.html", {"request": request, "table": table_html})
         
     except Exception as e:
             raise NetworkSecurityException(e,sys)
+
+# Route for uploading the received file to the server and S3
+@app.post("/uploadfile/")
+async def upload_file(file: UploadFile = File(...)):
+    try:
+        # Create the upload directory if it doesn't exist
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+        # Save the uploaded file temporarily
+        file_path = os.path.join(UPLOAD_DIR, file.filename)
+        with open(file_path, "wb") as f:
+            f.write(await file.read())
+        
+        # Upload the file to S3 prediction bucket using AWS CLI sync
+        upload_command = f"aws s3 sync {UPLOAD_DIR} s3://{PREDICTION_BUCKET_NAME}/input_files/"
+        os.system(upload_command)
+
+        # Return a success response
+        return JSONResponse(content={"message": f"File {file.filename} uploaded successfully to S3."}, status_code=200)
+
+    except Exception as e:
+        # Handle errors
+        return JSONResponse(content={"error": f"Failed to upload file: {str(e)}"}, status_code=400)
+
 
     
 if __name__=="__main__":

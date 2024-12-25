@@ -17,7 +17,8 @@ TEST_FILE_NAME: str = "test.csv"
 
 SCHEMA_FILE_PATH = os.path.join("data_schema", "schema.yaml")
 
-SAVED_MODEL_DIR = os.path.join("saved_models")
+# SAVED_MODEL_DIR = os.path.join("saved_models")
+FINAL_MODEL_DIR=os.path.join('final_model')
 MODEL_FILE_NAME = "model.pkl"
 
 
@@ -79,3 +80,4 @@ MODEL_TRAINER_OVER_FITTING_UNDER_FITTING_THRESHOLD: float = 0.05
 TRAINING_BUCKET_NAME = "networksecurity3"
 PREDICTION_BUCKET_NAME = "my-network-datasource-neeraj"
 PREDICTION_DIR="prediction"
+UPLOAD_DIR="upload_data"

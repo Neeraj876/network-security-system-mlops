@@ -26,7 +26,6 @@ from networksecurity.entity.artifact_entity import (
 
 from networksecurity.constant.training_pipeline import TRAINING_BUCKET_NAME
 from networksecurity.cloud.S3_syncer import S3Sync
-from networksecurity.constant.training_pipeline import SAVED_MODEL_DIR
 
 class TrainingPipeline:
     def __init__(self):

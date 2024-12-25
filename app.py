@@ -68,14 +68,27 @@ async def train_route():
 @app.post("/predict")
 async def predict_route(request: Request,file: UploadFile = File(...)):
     try:
+       # Step 1: Save the uploaded file temporarily
         print("Reading uploaded CSV file...")
-        df=pd.read_csv(file.file)
+        df = pd.read_csv(file.file)
         print("CSV file loaded successfully.")
 
-        #print(df)
+        # Step 2: Upload file to S3
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
+        file_path = os.path.join(UPLOAD_DIR, file.filename)
+        with open(file_path, "wb") as f:
+            f.write(await file.read())
+        
+        # Upload the file to S3 prediction bucket using AWS CLI sync
+        upload_command = f"aws s3 sync {UPLOAD_DIR} s3://{PREDICTION_BUCKET_NAME}/input_files/"
+        os.system(upload_command)
+        print(f"File uploaded successfully to S3: {file.filename}")
+
+        # print(df)
         preprocesor=load_object("final_model/preprocessor.pkl")
         final_model=load_object("final_model/model.pkl")
         network_model = NetworkModel(preprocessor=preprocesor,model=final_model)
+        
         print(df.iloc[0])
         y_pred = network_model.predict(df)
         print(y_pred)
@@ -91,28 +104,28 @@ async def predict_route(request: Request,file: UploadFile = File(...)):
     except Exception as e:
             raise NetworkSecurityException(e,sys)
 
-# Route for uploading the received file to the server and S3
-@app.post("/uploadfile/")
-async def upload_file(file: UploadFile = File(...)):
-    try:
-        # Create the upload directory if it doesn't exist
-        os.makedirs(UPLOAD_DIR, exist_ok=True)
+# # Route for uploading the received file to the server and S3
+# @app.post("/uploadfile/")
+# async def upload_file(file: UploadFile = File(...)):
+#     try:
+#         # Create the upload directory if it doesn't exist
+#         os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-        # Save the uploaded file temporarily
-        file_path = os.path.join(UPLOAD_DIR, file.filename)
-        with open(file_path, "wb") as f:
-            f.write(await file.read())
+#         # Save the uploaded file temporarily
+#         file_path = os.path.join(UPLOAD_DIR, file.filename)
+#         with open(file_path, "wb") as f:
+#             f.write(await file.read())
         
-        # Upload the file to S3 prediction bucket using AWS CLI sync
-        upload_command = f"aws s3 sync {UPLOAD_DIR} s3://{PREDICTION_BUCKET_NAME}/input_files/"
-        os.system(upload_command)
+#         # Upload the file to S3 prediction bucket using AWS CLI sync
+#         upload_command = f"aws s3 sync {UPLOAD_DIR} s3://{PREDICTION_BUCKET_NAME}/input_files/"
+#         os.system(upload_command)
 
-        # Return a success response
-        return JSONResponse(content={"message": f"File {file.filename} uploaded successfully to S3."}, status_code=200)
+#         # Return a success response
+#         return JSONResponse(content={"message": f"File {file.filename} uploaded successfully to S3."}, status_code=200)
 
-    except Exception as e:
-        # Handle errors
-        return JSONResponse(content={"error": f"Failed to upload file: {str(e)}"}, status_code=400)
+#     except Exception as e:
+#         # Handle errors
+#         return JSONResponse(content={"error": f"Failed to upload file: {str(e)}"}, status_code=400)
 
 
     

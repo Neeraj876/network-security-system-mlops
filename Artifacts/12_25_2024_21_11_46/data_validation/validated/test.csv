@@ -1,0 +1,206 @@
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/parsers/python_parser.py"", line 133, in __init__"
+) = self._infer_columns()
+^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/parsers/python_parser.py"", line 432, in _infer_columns"
+"raise EmptyDataError(""No columns to parse from file"") from err"
+pandas.errors.EmptyDataError: No columns to parse from file
+"During handling of the above exception, another exception occurred:"
+Traceback (most recent call last):
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py"", line 76, in initiate_data_validation"
+train_dataframe=DataValidation.read_data(train_file_path)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py"", line 28, in read_data"
+"raise NetworkSecurityException(e, sys)"
+networksecurity.exception.exception.NetworkSecurityException: Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [26] error message [No columns to parse from file]
+"During handling of the above exception, another exception occurred:"
+Traceback (most recent call last):
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py"", line 53, in start_data_validation"
+data_validation_artifact=data_validation.initiate_data_validation()
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py"", line 113, in initiate_data_validation"
+"raise NetworkSecurityException(e, sys)"
+networksecurity.exception.exception.NetworkSecurityException: Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [76] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [26] error message [No columns to parse from file]]
+"During handling of the above exception, another exception occurred:"
+Traceback (most recent call last):
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py"", line 109, in run_pipeline"
+data_validation_artifact=self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py"", line 56, in start_data_validation"
+"raise NetworkSecurityException(e,sys)"
+networksecurity.exception.exception.NetworkSecurityException: Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py] line number [53] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [76] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [26] error message [No columns to parse from file]]]
+"During handling of the above exception, another exception occurred:"
+Traceback (most recent call last):
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/app.py"", line 63, in train_route"
+train_pipeline.run_pipeline()
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py"", line 118, in run_pipeline"
+"raise NetworkSecurityException(e,sys)"
+networksecurity.exception.exception.NetworkSecurityException: Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py] line number [109] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py] line number [53] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [76] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [26] error message [No columns to parse from file]]]]
+"During handling of the above exception, another exception occurred:"
+Traceback (most recent call last):
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py"", line 403, in run_asgi"
+result = await app(  # type: ignore[func-returns-value]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py"", line 60, in __call__"
+"return await self.app(scope, receive, send)"
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/fastapi/applications.py"", line 1054, in __call__"
+"await super().__call__(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/applications.py"", line 113, in __call__"
+"await self.middleware_stack(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/middleware/errors.py"", line 187, in __call__"
+raise exc
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/middleware/errors.py"", line 165, in __call__"
+"await self.app(scope, receive, _send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/middleware/cors.py"", line 85, in __call__"
+"await self.app(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/middleware/exceptions.py"", line 62, in __call__"
+"await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/_exception_handler.py"", line 53, in wrapped_app"
+raise exc
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/_exception_handler.py"", line 42, in wrapped_app"
+"await app(scope, receive, sender)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/routing.py"", line 715, in __call__"
+"await self.middleware_stack(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/routing.py"", line 735, in app"
+"await route.handle(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/routing.py"", line 288, in handle"
+"await self.app(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/routing.py"", line 76, in app"
+"await wrap_app_handling_exceptions(app, request)(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/_exception_handler.py"", line 53, in wrapped_app"
+raise exc
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/_exception_handler.py"", line 42, in wrapped_app"
+"await app(scope, receive, sender)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/routing.py"", line 73, in app"
+response = await f(request)
+^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/fastapi/routing.py"", line 301, in app"
+raw_response = await run_endpoint_function(
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/fastapi/routing.py"", line 212, in run_endpoint_function"
+return await dependant.call(**values)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/app.py"", line 66, in train_route"
+"raise NetworkSecurityException(e,sys)"
+networksecurity.exception.exception.NetworkSecurityException: Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/app.py] line number [63] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py] line number [109] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py] line number [53] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [76] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [26] error message [No columns to parse from file]]]]]
+"INFO:     127.0.0.1:45082 - ""GET /train HTTP/1.1"" 500 Internal Server Error"
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/parsers/python_parser.py"", line 404, in _infer_columns"
+line = self._buffered_line()
+^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/parsers/python_parser.py"", line 637, in _buffered_line"
+return self._next_line()
+^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/parsers/python_parser.py"", line 738, in _next_line"
+orig_line = self._next_iter_line(row_num=self.pos + 1)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/parsers/python_parser.py"", line 805, in _next_iter_line"
+line = next(self.data)
+^^^^^^^^^^^^^^^
+StopIteration
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py"", line 26, in read_data"
+return pd.read_clipboard(file_path)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/clipboards.py"", line 129, in read_clipboard"
+"return read_csv(StringIO(text), sep=sep, dtype_backend=dtype_backend, **kwargs)"
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/parsers/readers.py"", line 1026, in read_csv"
+"return _read(filepath_or_buffer, kwds)"
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/parsers/readers.py"", line 620, in _read"
+"parser = TextFileReader(filepath_or_buffer, **kwds)"
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/parsers/readers.py"", line 1620, in __init__"
+"self._engine = self._make_engine(f, self.engine)"
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/parsers/readers.py"", line 1898, in _make_engine"
+"return mapping[engine](f, **self.options)"
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/parsers/python_parser.py"", line 133, in __init__"
+) = self._infer_columns()
+^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/pandas/io/parsers/python_parser.py"", line 432, in _infer_columns"
+"raise EmptyDataError(""No columns to parse from file"") from err"
+pandas.errors.EmptyDataError: No columns to parse from file
+"During handling of the above exception, another exception occurred:"
+Traceback (most recent call last):
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py"", line 76, in initiate_data_validation"
+train_dataframe=DataValidation.read_data(train_file_path)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py"", line 28, in read_data"
+"raise NetworkSecurityException(e, sys)"
+networksecurity.exception.exception.NetworkSecurityException: Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [26] error message [No columns to parse from file]
+"During handling of the above exception, another exception occurred:"
+Traceback (most recent call last):
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py"", line 53, in start_data_validation"
+data_validation_artifact=data_validation.initiate_data_validation()
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py"", line 113, in initiate_data_validation"
+"raise NetworkSecurityException(e, sys)"
+networksecurity.exception.exception.NetworkSecurityException: Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [76] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [26] error message [No columns to parse from file]]
+"During handling of the above exception, another exception occurred:"
+Traceback (most recent call last):
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py"", line 109, in run_pipeline"
+data_validation_artifact=self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py"", line 56, in start_data_validation"
+"raise NetworkSecurityException(e,sys)"
+networksecurity.exception.exception.NetworkSecurityException: Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py] line number [53] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [76] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [26] error message [No columns to parse from file]]]
+"During handling of the above exception, another exception occurred:"
+Traceback (most recent call last):
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/app.py"", line 63, in train_route"
+train_pipeline.run_pipeline()
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py"", line 118, in run_pipeline"
+"raise NetworkSecurityException(e,sys)"
+networksecurity.exception.exception.NetworkSecurityException: Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py] line number [109] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py] line number [53] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [76] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [26] error message [No columns to parse from file]]]]
+"During handling of the above exception, another exception occurred:"
+Traceback (most recent call last):
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py"", line 403, in run_asgi"
+result = await app(  # type: ignore[func-returns-value]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py"", line 60, in __call__"
+"return await self.app(scope, receive, send)"
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/fastapi/applications.py"", line 1054, in __call__"
+"await super().__call__(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/applications.py"", line 113, in __call__"
+"await self.middleware_stack(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/middleware/errors.py"", line 187, in __call__"
+raise exc
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/middleware/errors.py"", line 165, in __call__"
+"await self.app(scope, receive, _send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/middleware/cors.py"", line 85, in __call__"
+"await self.app(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/middleware/exceptions.py"", line 62, in __call__"
+"await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/_exception_handler.py"", line 53, in wrapped_app"
+raise exc
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/_exception_handler.py"", line 42, in wrapped_app"
+"await app(scope, receive, sender)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/routing.py"", line 715, in __call__"
+"await self.middleware_stack(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/routing.py"", line 735, in app"
+"await route.handle(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/routing.py"", line 288, in handle"
+"await self.app(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/routing.py"", line 76, in app"
+"await wrap_app_handling_exceptions(app, request)(scope, receive, send)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/_exception_handler.py"", line 53, in wrapped_app"
+raise exc
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/_exception_handler.py"", line 42, in wrapped_app"
+"await app(scope, receive, sender)"
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/starlette/routing.py"", line 73, in app"
+response = await f(request)
+^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/fastapi/routing.py"", line 301, in app"
+raw_response = await run_endpoint_function(
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/network/lib/python3.12/site-packages/fastapi/routing.py"", line 212, in run_endpoint_function"
+return await dependant.call(**values)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"File ""/mnt/c/Users/HP/ml_projects/NetworkSecurity/app.py"", line 66, in train_route"
+"raise NetworkSecurityException(e,sys)"
+networksecurity.exception.exception.NetworkSecurityException: Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/app.py] line number [63] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py] line number [109] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/pipeline/training_pipeline.py] line number [53] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [76] error message [Error occured in python script name [/mnt/c/Users/HP/ml_projects/NetworkSecurity/networksecurity/components/data_validation.py] line number [26] error message [No columns to parse from file]]]]]

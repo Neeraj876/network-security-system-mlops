@@ -1,1 +1,0 @@
-879381282018.dkr.ecr.us-east-1.amazonaws.com/networkssecurity

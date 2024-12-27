@@ -19,6 +19,6 @@ requests
 tldextract 
 beautifulsoup4 
 python-whois 
-
+dagshub
 
 #-e .

@@ -103,31 +103,6 @@ async def predict_route(request: Request,file: UploadFile = File(...)):
         
     except Exception as e:
             raise NetworkSecurityException(e,sys)
-
-# # Route for uploading the received file to the server and S3
-# @app.post("/uploadfile/")
-# async def upload_file(file: UploadFile = File(...)):
-#     try:
-#         # Create the upload directory if it doesn't exist
-#         os.makedirs(UPLOAD_DIR, exist_ok=True)
-
-#         # Save the uploaded file temporarily
-#         file_path = os.path.join(UPLOAD_DIR, file.filename)
-#         with open(file_path, "wb") as f:
-#             f.write(await file.read())
-        
-#         # Upload the file to S3 prediction bucket using AWS CLI sync
-#         upload_command = f"aws s3 sync {UPLOAD_DIR} s3://{PREDICTION_BUCKET_NAME}/input_files/"
-#         os.system(upload_command)
-
-#         # Return a success response
-#         return JSONResponse(content={"message": f"File {file.filename} uploaded successfully to S3."}, status_code=200)
-
-#     except Exception as e:
-#         # Handle errors
-#         return JSONResponse(content={"error": f"Failed to upload file: {str(e)}"}, status_code=400)
-
-
     
 if __name__=="__main__":
     app_run(app,host="localhost",port=8000)

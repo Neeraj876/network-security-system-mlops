@@ -15,6 +15,10 @@ apache-airflow
 python-multipart
 Jinja2
 streamlit
+requests 
+tldextract 
+beautifulsoup4 
+python-whois 
 
 
 #-e .

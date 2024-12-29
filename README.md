@@ -76,38 +76,75 @@ Malicious URLs are links that lead to harmful websites, often used by cybercrimi
 ## Components
 
 ### 1. Frontend (Streamlit)
-The Streamlit app provides URL safety predictions:
+The Streamlit app provides an intuitive interface for users to predict single URLs as Malicious, Suspicious or Safe:
+
 
 - Safe URL Example:
-![Streamlit Safe URL](https://github.com/user-attachments/assets/5ad92508-b587-4e93-b581-d83a8cc397ae)
+![Streamlit Safe URL](_assets/streamlit_safe.png)
+
+- Suspicious URL Example:
+![Streamlit Suspicious URL](_assets/streamlit_suspicious.png)
 
 - Malicious URL Example:
-![Streamlit Malicious URL](https://github.com/user-attachments/assets/9aa17086-4295-4624-b2ad-249de47a1b44)
+![Streamlit Malicious URL](_assets/streamlit_malicious.png)
 
 ### 2. Backend (FastAPI)
 FastAPI handles model operations and batch predictions:
 
 - API Documentation:
-![FastAPI Docs](https://github.com/user-attachments/assets/07b06b78-b089-40af-9499-b71c0cb196d7)
+![FastAPI Docs](_assets/fast_api_ui.png)
 
 - Training Route:
-![Training Route](https://github.com/user-attachments/assets/c86a5761-d256-4ab8-b0ef-4a043a7f7ef7)
+![Training Route](_assets/train_route.png)
 
 - Training Execution:
-![Training Execution](https://github.com/user-attachments/assets/3b0477f5-0446-4937-b125-8944412108af)
+![Training Execution](_assets/train_route_success.png)
+
+- AWS S3 bucket named "networksecurity3" where the artifacts, model.pkl and preprocessor.pkl are stored.
+![](_assets/s3_buckets.png)
+![](_assets/training_bucket.png)
+![](_assets/artifacts.png)
+![](_assets/final_model.png)
+
+- Batch Prediction Route:
+![Batch Route](_assets/predict_route.png)
+
+- Batch Prediction Execution:
+![Batch Execution](_assets/predict_route_success.png)
+
+- AWS S3 bucket named "my-network-datasource-neeraj" where the csv file uploaded by users to `POST /predict` is stored.
+![](_assets/s3_buckets.png)
+![](_assets/prediction_bucket.png)
+
 
 ### 3. MLOps Pipeline
 
 #### Data Ingestion
 - MongoDB integration for data retrieval
-- Data cleaning and feature store export
-![MongoDB Data](https://github.com/user-attachments/assets/ff806462-7b17-48a3-bad1-cd6f2186a72c)
+- Exported the processed data to a feature store for further usage.
+- Split the data into training and testing datasets, ensuring no data leakage.
+![MongoDB Data](_assets/mongodb.png)
 
-#### Model Training and Evaluation
-- XGBoost Classifier implementation
-- Performance metrics tracking with MLflow
-![MLflow Metrics](https://github.com/user-attachments/assets/33bd60a6-41c5-4d28-9bb2-d3006db91070)
-![Model Performance](https://github.com/user-attachments/assets/48722274-17b6-40b3-8ce9-1923b0523718)
+2. **Data Validation**:
+   - Validated the schema to ensure all required columns are present.
+   - Checked numerical columns for correctness and detected **data drift** using statistical tests.
+   - Generated detailed drift reports to monitor dataset consistency.
+
+3. **Data Transformation**:
+   - Applied preprocessing steps, such as imputing missing values using a **KNNImputer**.
+   - Prepared the data into transformed **NumPy arrays** for model training.
+   - Saved the transformation pipeline as an artifact for future use.
+   - Saved the preprocessing pipeline as a **pickle file**.
+
+4. **Model Training and Evaluation**:
+   - Implemented a range of classification models, including Random Forest, Gradient Boosting, Decision Tree, Logistic Regression, and AdaBoost.
+   - Performed hyperparameter tuning using **GridSearchCV** with predefined parameter grids for each model to enhance performance.
+   - Trained and tested models on transformed datasets to ensure consistent preprocessing.
+   - Compared the performance of different models using multiple evaluation metrics to ensure the most suitable model was selected for the task.
+   - Saved the final trained model as a **pickle file**.
+   - Evaluated metrics such as **Precision**, **Recall**, and **F1-score** for the model through multiple experiments, with results tracked using **MLflow**, which is hosted on **AWS**. 
+    ![MLflow Experiments](_assets/mlflow_experiments.png)
+    ![MLflow Artifacts](_assets/mlflow_artifacts.png)
 
 ### 4. AWS Integration
 
@@ -120,20 +157,22 @@ FastAPI handles model operations and batch predictions:
 
 ### 5. CI/CD Pipeline with GitHub Actions
 
-- Self-Hosted Runner Setup:
-![EC2 Runner](https://github.com/user-attachments/assets/eda98175-f802-44be-b651-a41c93ad9003)
-![Runner Status](https://github.com/user-attachments/assets/c95d5408-0f9e-43ac-97a9-0c020e340582)
+The project leverages a robust **CI/CD pipeline** to automate the integration, delivery, and deployment processes, streamlining the development lifecycle. With **GitHub Actions**, every code update triggers automated workflows to test, build, and deploy the application efficiently and reliably.
+
+- Using AWS EC2 instance as a Self-Hosted Runner for Github Actions
+  ![EC2 Runner](_assets/self_hosted_runner_aws.png)
+  ![Runner Status](_assets/self_hosted_runner.png)
 
 - Pipeline Stages:
   - Continuous Integration:
-    ![CI Stage](https://github.com/user-attachments/assets/d778a287-794d-456f-a9b2-68ac3362ac20)
+    ![CI Stage](_assets/continuous_integration.png)
   - Continuous Delivery:
-    ![CD Stage](https://github.com/user-attachments/assets/8058ce67-127e-4de6-ac81-a6368da9198b)
+    ![CD Stage](_assets/continuous_delivery.png)
   - Deployment:
-    ![Deployment](https://github.com/user-attachments/assets/6ff3eb07-0a97-4980-9112-d3c56c8d381e)
+    ![Deployment](_assets/continuous_deployment.png)
 
 - Successful Pipeline Execution:
-![CI/CD Complete](https://github.com/user-attachments/assets/9ad3f8c5-9b85-4d89-8bf3-3662bbca22f1)
+![CI/CD Complete](_assets/ci_cd_completed.png)
 
 ### 6. Docker Integration
 - ECR Image Management
@@ -146,9 +185,9 @@ FastAPI handles model operations and batch predictions:
 ![Dashboard](https://github.com/user-attachments/assets/0d646c31-62e6-4597-b6c8-96652f94fc53)
 
 - DAGs:
-  - Network Prediction DAG:
+  - Batch Prediction DAG:
     ![Prediction DAG](https://github.com/user-attachments/assets/94e497fe-9ffa-4c12-9dd8-ae57f833ffd3)
-  - Network Training DAG:
+  - Training Pipeline DAG:
     ![Training DAG](https://github.com/user-attachments/assets/974bfab6-2ff8-4efb-b3aa-8aa648451756)
 
 - DAG Overview:
@@ -270,4 +309,6 @@ This section provides a step-by-step guide on how to set up and run the Maliciou
    - Track all experiments, model metrics (e.g., F1-score, Precision), and logs via the **MLflow UI**.
 
 ---
+
+
 

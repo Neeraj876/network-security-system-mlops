@@ -25,11 +25,7 @@ from sklearn.ensemble import (
 import mlflow
 from urllib.parse import urlparse
 
-import dagshub
-dagshub.init(repo_owner='neerajhhhhh225', repo_name='network-security-system-mlops', mlflow=True)
-
-
-# os.environ["MLFLOW_TRACKING_URI"]="http://ec2-54-174-118-70.compute-1.amazonaws.com:5000/"
+os.environ["MLFLOW_TRACKING_URI"]="http://ec2-54-174-118-70.compute-1.amazonaws.com:5000/"
 
 class ModelTrainer:
     def __init__(self, model_trainer_config:ModelTrainerConfig, data_transformation_artifact:DataTransformationArtifact):
@@ -52,20 +48,20 @@ class ModelTrainer:
             mlflow.log_metric("recall_score",recall_score)
             mlflow.sklearn.log_model(best_model,"model")
 
-            # remote_server_uri="http://ec2-54-174-118-70.compute-1.amazonaws.com:5000/" 
-            # mlflow.set_tracking_uri(remote_server_uri)
-            # tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+            remote_server_uri="http://ec2-54-174-118-70.compute-1.amazonaws.com:5000/" 
+            mlflow.set_tracking_uri(remote_server_uri)
+            tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
             
-            # # Model registry does not work with file store
-            # if tracking_url_type_store != "file":
+            # Model registry does not work with file store
+            if tracking_url_type_store != "file":
 
-            #     # Register the model
-            #     # There are other ways to use the Model Registry, which depends on the use case,
-            #     # please refer to the doc for more information:
-            #     # https://mlflow.org/docs/latest/model-registry.html#api-workflow
-            #     mlflow.sklearn.log_model(best_model, "model", registered_model_name=best_model_name)
-            # else:
-            #     mlflow.sklearn.log_model(best_model, "model")
+                # Register the model
+                # There are other ways to use the Model Registry, which depends on the use case,
+                # please refer to the doc for more information:
+                # https://mlflow.org/docs/latest/model-registry.html#api-workflow
+                mlflow.sklearn.log_model(best_model, "model", registered_model_name=best_model_name)
+            else:
+                mlflow.sklearn.log_model(best_model, "model")
 
 
 

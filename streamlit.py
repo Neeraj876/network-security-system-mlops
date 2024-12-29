@@ -2,7 +2,6 @@ import streamlit as st
 import pickle
 import pandas as pd
 import socket
-import tldextract
 import requests
 import logging
 from urllib.parse import urlparse
@@ -281,33 +280,38 @@ def extract_features(url):
 
 # Streamlit app code
 def main():
-    st.title("URL Phishing Detection")
+    st.title("Network Security System URL Detection App")
 
-    st.write("This app predicts whether a URL is phishing or legitimate based on several features.")
+    st.write("This app predicts whether a URL is **Malicious**, **Suspicious** or **Safe** based on extracted features.")
     
-    url = st.text_input("Enter URL:")
+    url = st.text_input("🔗 Enter URL:")
+    analyze_button = st.button("Analyze")
 
-    if url:
-        # Extract features
-        features = extract_features(url)
-        
-        # Convert features into a DataFrame for prediction
-        feature_df = pd.DataFrame([features])
-        
-        # Apply preprocessor (if any transformation is applied)
-        processed_features = preprocessor.transform(feature_df)
-        
-        # Make prediction
-        prediction = model.predict(processed_features)
-        print(prediction)
-        
-        # Display the result
-        if prediction == 1:
-            st.success("The URL is Legitimate!")
-        elif prediction == 0:
-            st.warning("The URL is Suspicious")
-        else:
-            st.error("The URL is Phishing!")
+    if analyze_button and url:
+        with st.spinner("Analyzing URL... Please wait."):
+            # Extract features
+            features = extract_features(url)
+            if not features:
+                st.error("Error extracting features from the URL. Please try again.")
+                return
+
+            # Prepare data for prediction
+            feature_df = pd.DataFrame([features])
+            processed_features = preprocessor.transform(feature_df)
+
+            # Predict using the model
+            try:
+                prediction = model.predict(processed_features)
+                print(prediction)
+                if prediction == 1:
+                    st.success("The URL is **Safe**!")
+                elif prediction == 0:
+                    st.warning("The URL is **Suspicious**.")
+                else:
+                    st.error("The URL is **Malicious**!")
+            except Exception as e:
+                st.error(f"Prediction failed: {str(e)}")
+                logger.error(f"Prediction error: {str(e)}")
 
 # Run the app
 if __name__ == "__main__":

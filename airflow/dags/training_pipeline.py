@@ -1,10 +1,8 @@
-from asyncio import tasks
-import json
-from textwrap import dedent
 import pendulum
 import os
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.providers.mongo.hooks.mongo import MongoHook
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -20,6 +18,20 @@ with DAG(
 
     
     def training(**kwargs):
+
+        # MongoDB connection ID from Airflow UI
+        mongo_conn_id = "mongo_default"  # Ensure this matches the Airflow UI connection ID
+        try:
+            mongo_hook = MongoHook(conn_id=mongo_conn_id)
+            # Establish the connection
+            client = mongo_hook.get_conn()
+            # Validate the connection by fetching server information
+            server_info = client.server_info()
+            print("MongoDB connection successful")
+            print(f"MongoDB Server Info: {server_info}")
+        except Exception as e:
+            print(f"Failed to connect to MongoDB: {e}")
+            raise  # Re-raise the exception to ensure task failure is logged
         
         from networksecurity.pipeline.training_pipeline import TrainingPipeline
         training_obj=TrainingPipeline()

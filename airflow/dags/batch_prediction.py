@@ -1,6 +1,3 @@
-from asyncio import tasks
-import json
-from textwrap import dedent
 import pendulum
 import os
 from airflow import DAG
@@ -12,8 +9,7 @@ load_dotenv()
 with DAG(
     'network_prediction',
     default_args={'retries': 2},
-    # [END default_args]
-    description='Network Security Prediction',
+    description='Network Security Batch Prediction',
     schedule_interval="@weekly",
     start_date=pendulum.datetime( 2024, 12, 25, tz="UTC"),
     catchup=False,

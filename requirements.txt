@@ -9,16 +9,13 @@ pyaml
 mlflow
 fastapi
 uvicorn
-boto3
 scipy
 apache-airflow
-python-multipart
 Jinja2
 streamlit
 requests 
-tldextract 
 beautifulsoup4 
 python-whois 
-dagshub
+apache-airflow-providers-mongo
 
 #-e .

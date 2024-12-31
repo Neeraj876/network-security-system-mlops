@@ -218,7 +218,7 @@ The project leverages a robust **CI/CD pipeline** to automate the integration, d
     ![CI Stage](_assets/continuous_integration.png)
   - Continuous Delivery:
     ![CD Stage](_assets/continuous_delivery.png)
-  - Deployment:
+  - Continuous Deployment:
     ![Deployment](_assets/continuous_deployment.png)
 
 - Successful Pipeline Execution:

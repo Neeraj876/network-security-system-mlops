@@ -9,7 +9,7 @@ Malicious URLs are are commonly used by cybercriminals in phishing attacks, soci
 This solution includes a robust pipeline for detecting malicious URLs, offering both real-time single URL predictions and batch predictions through an interactive user interface. The system is designed for easy integration into existing security platforms, enabling automated monitoring and protection against malicious web activity.
 
 ## Architecture
-![Architecture](_assets/network_architecure.gif)
+![Architecture](_assets/network_architecture.gif)
 
 ## Tech Stack 🛠️
 

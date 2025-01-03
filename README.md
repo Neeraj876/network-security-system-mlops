@@ -4,9 +4,7 @@ This is a comprehensive, end-to-end MLOps solution designed to detect and classi
 
 ## Introduction
 
-Malicious URLs are are commonly used by cybercriminals in phishing attacks, social engineering schemes, and malware attacks, posing significant risks to individuals and organizations. The Malicious URL Detection project uses machine learning to identify and classify these harmful links, enabling timely interventions and improved web security.
-
-This solution includes a robust pipeline for detecting malicious URLs, offering both real-time single URL predictions and batch predictions through an interactive user interface. The system is designed for easy integration into existing security platforms, enabling automated monitoring and protection against malicious web activity.
+Malicious URLs are are commonly used by cybercriminals in phishing attacks, social engineering schemes, and malware attacks, posing significant risks to individuals and organizations. The Malicious URL Detection project uses machine learning to identify and classify these harmful links, enabling timely interventions and improved web security. This solution includes a robust pipeline for detecting malicious URLs, offering both real-time single URL predictions and batch predictions through an interactive user interface. 
 
 ## Architecture
 ![Architecture](_assets/network_architecture.gif)

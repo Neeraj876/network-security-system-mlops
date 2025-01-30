@@ -127,7 +127,7 @@ The dataset contains 30 features extracted from URLs to classify them as Malicio
 ## Components
 
 ### 1. Frontend (Streamlit)
-The Streamlit app provides an intuitive interface for users to predict single URLs as Malicious, Suspicious or Safe:
+There is a live demo of this project using [Streamlit](https://streamlit.io/) which you can find [here](https://network-security-system-mlops-6nshvkcv8cxrngosbdlrhb.streamlit.app/). The Streamlit app provides an intuitive interface for users to predict single URLs as Malicious, Suspicious or Safe:
 
 
 - Safe URL Example:
